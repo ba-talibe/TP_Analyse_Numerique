@@ -24,14 +24,6 @@ def quadratic_problem2d(Lambda):
     return P,q,r
 
 
-
-def cost(x):
-    #TO DO
-    global P, q, r
-    cout = 0.5*np.dot(x.T,np.dot(P,x)) + np.dot(q,x) + r
-    return cout
-
-
 # fonction adapter pour le calcul du cout lorsque le module est importé
 def get_cost(P,q,r):
     def cost(x):
@@ -46,10 +38,10 @@ def get_gradient(P,q):
         return grad
     return gradient
 
-def gradient(x):
-    global P, q
-    grad = np.dot(P,x) + q
-    return grad
+def get_hessian(P):
+    def hessian(x):
+        return P
+    return hessian
 
 def steepest_descent(x0,cost,gradient,step, epsilon=1e-4, maxiter=100000):
     xlist = [x0] # list of points
